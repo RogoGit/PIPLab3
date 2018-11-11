@@ -21,8 +21,10 @@ public class DotsCollectionBean implements Serializable {
         newDot.setKx(Double.parseDouble(kx));
         newDot.setKy(Double.parseDouble(ky));
         newDot.setRad(Double.parseDouble(rad));
-        newDot.calcColor();
-        newDot.calcRes();
+        newDot.setColor(newDot.calcColor());
+        newDot.setRes(newDot.calcRes());
+        newDot.setAx(Double.parseDouble(kx));
+        newDot.setAy(Double.parseDouble(ky));
         areaDots.add(newDot);
     }
 
@@ -37,9 +39,9 @@ public class DotsCollectionBean implements Serializable {
     public void reSizeDots(double newR, double oldR) {
 if (this.areaDots != null) {
     for (DotMaker dot : this.areaDots) {
-        dot.setKx((dot.getKx() - 190) * oldR / dot.getRad() + 190);
-        dot.setKy((dot.getKy() - 210) * oldR / dot.getRad() + 210);
-        dot.calcColor();
+        dot.setAx(((dot.getKx() - 190) * (oldR/newR) / dot.getRad() + 190)*0.01);
+        dot.setAy(((dot.getKy() - 210) * (oldR/newR) / dot.getRad() + 210)*0.01);
+        dot.setColor(dot.calcColor());
     }
 }
     }

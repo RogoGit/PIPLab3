@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class DotMaker implements Serializable {
     private double kx=0;
     private double ky=0;
-   // private double ax;
- //   private double ay;
+    private double ax;
+    private double ay;
     private double rad=1;
     private String color;
     private String res;
@@ -21,6 +21,22 @@ public class DotMaker implements Serializable {
 
     public DotMaker() {
 
+    }
+
+    public double getAx() {
+        return ax;
+    }
+
+    public void setAx(double ax) {
+        this.ax = ax;
+    }
+
+    public double getAy() {
+        return ay;
+    }
+
+    public void setAy(double ay) {
+        this.ay = ay;
     }
 
     public String getColor() {
@@ -65,24 +81,24 @@ public class DotMaker implements Serializable {
 
     public boolean areaCheck() {
 
-        return (this.kx <= 0 && this.ky <= 0 && -this.kx <= this.rad / 2 && -this.ky <= this.rad) ||
-                (this.kx <= 0 && this.ky >= 0 && (this.kx * this.kx + this.ky * this.ky) <= (this.rad * this.rad) / 4) ||
-                (this.kx >= 0 && this.ky <= 0 && this.ky >= (-this.kx - this.rad)); // FIX IT!!!
+        return (this.kx <= 0 && this.ky <= 0 && Math.abs(this.kx) <= this.rad / 2 && Math.abs(this.ky) <= this.rad) ||
+                (this.kx <= 0 && this.ky >= 0 && (this.kx * this.kx + this.ky * this.ky) <= (this.rad * this.rad)) ||
+                (this.kx >= 0 && this.ky <= 0 && this.ky >= (2 * this.kx - this.rad / 2));
     }
 
-    public void calcColor() {
+    public String calcColor() {
         if (areaCheck()) {
-            this.color = "green";
+            return "green";
         } else {
-            this.color="red";
+            return "red";
         }
     }
 
-    public void calcRes() {
+    public String calcRes() {
         if (areaCheck()) {
-            this.color = "Попадает";
+            return "Попадает";
         } else {
-            this.color="Не попадает";
+            return "Не попадает";
         }
     }
 

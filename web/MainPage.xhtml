@@ -35,7 +35,7 @@
                 <line x1="190" x2="190" y1="0" y2="420" stroke="black" stroke-width="3"/>
                 <line x1="0" x2="380" y1="210" y2="210" stroke="black" stroke-width="3"/>
                     <ui:repeat value="#{dotsColl.areaDots}" var="dot">
-                    <circle r="3" cx="#{190 + dot.kx*180*dot.rad}" cy="#{(210 + -180*dot.ky*dot.rad)}" fill="#{dot.color}" />
+                    <circle r="3" cx="#{190 + dot.ax*180*dot.rad}" cy="#{(210 + -180*dot.ay*dot.rad)}" fill="#{dot.color}" />
                     </ui:repeat>
                 </svg>
                 </center>
@@ -43,10 +43,10 @@
                 <h:form id="AreaForm" >
                     <h:inputHidden id="AreaX" value="#{clickDot.aX}"/>
                     <h:inputHidden id="AreaY" value="#{clickDot.aY}"/>
-                    <h:inputHidden id="AreaR" value="#{clickDot.aR}" required="true" requiredMessage="Введите радиус">
+                    <h:inputHidden id="AreaR" value="#{dotMake.rad}" required="true" requiredMessage="Введите радиус">
                         <f:validator validatorId="RValidator" />
                     </h:inputHidden>
-                    <h:commandButton id="areaSub" styleClass="sbBut" action ="#{dotsColl.addDot(clickDot.aX,clickDot.aY,clickDot.aR)}" />
+                    <h:commandButton id="areaSub" styleClass="sbBut" action ="#{dotsColl.addDot(clickDot.aX,clickDot.aY,dotMake.rad)}" />
                 </h:form>
                 <h:form id="resizeForm">
                     <h:inputHidden id="newR" value="#{resizeDot.newR}"/>
@@ -82,7 +82,7 @@
                 <h:form id="fieldsForm">
                     <br/> Введите R:
                     <h:panelGroup styleClass="tooltip" layout="block">
-                        <h:inputText  maxlength="30" value="#{dotMake.rad}" required="true" requiredMessage="Введите радиус" onchange="" styleClass="enter" id ="rad" style="width:170px;">
+                        <h:inputText  maxlength="30" value="#{dotMake.rad}" required="true" requiredMessage="Введите радиус" onchange="resizeArea()" styleClass="enter" id ="rad" style="width:170px;">
                             <f:validator validatorId="RValidator" />
                         </h:inputText>
                         <span class="tooltiptext">Введите число от 1 до 4</span>
