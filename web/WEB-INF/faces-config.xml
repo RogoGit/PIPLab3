@@ -34,10 +34,18 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean eager="false">
-        <managed-bean-name>formDot</managed-bean-name>
-        <managed-bean-class>com.FormClickedDots</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
+    <validator>
+        <validator-id>RValidator</validator-id>
+        <validator-class>
+            com.RValidator
+        </validator-class>
+    </validator>
+
+    <validator>
+        <validator-id>YValidator</validator-id>
+        <validator-class>
+            com.YValidator
+        </validator-class>
+    </validator>
 
 </faces-config>

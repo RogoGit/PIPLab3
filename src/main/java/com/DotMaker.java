@@ -3,11 +3,11 @@ package com;
 import java.io.Serializable;
 
 public class DotMaker implements Serializable {
-    private double kx;
-    private double ky;
+    private double kx=0;
+    private double ky=0;
    // private double ax;
  //   private double ay;
-    private double rad;
+    private double rad=1;
     private String color;
     private String res;
 
