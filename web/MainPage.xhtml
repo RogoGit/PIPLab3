@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <f:view contentType="text/html">
     <h:head>
         <link href="MainPageStyles.css" rel="stylesheet"/>
@@ -24,11 +25,12 @@
                 </h:form>
             </h:panelGroup>
             <h:panelGroup styleClass="MainPanels" id="Area" layout="block">
-                <svg width="380" height="420" onclick="makeNewDot()">
+                <center>
+                <svg width="380" height="420" onclick="makeNewDotClicked()" >
                 <circle r="90" cx="190" cy="210" fill="silver"/>
                     <polygon points="190,210 190,30 370,30 370,210" fill="cornflowerblue"/>
                     <polygon points="190,210 190,390 370,390 370,210" fill="cornflowerblue"/>
-                <polygon points="190,210 190,300 370,210" fill="silver"/>
+                <polygon points="190,210 190,300 370,210" fill="silver" />
                 <polygon points="190,210 190,390 100,390 100,210" fill="silver"/>
                 <line x1="190" x2="190" y1="0" y2="420" stroke="black" stroke-width="3"/>
                 <line x1="0" x2="380" y1="210" y2="210" stroke="black" stroke-width="3"/>
@@ -36,6 +38,24 @@
                     <circle r="3" cx="#{190 + dot.kx*180*dot.rad}" cy="#{(210 + -180*dot.ky*dot.rad)}" fill="#{dot.color}" />
                     </ui:repeat>
                 </svg>
+                </center>
+                <h:form id="AreaForm" >
+                    <h:inputHidden id="AreaX" value="#{clickDot.aX}"/>
+                    <h:inputHidden id="AreaY" value="#{clickDot.aY}"/>
+                    <h:inputHidden id="AreaR" value="#{clickDot.aR}"/>
+                    <h:commandButton id="areaSub" styleClass="sbBut" action ="#{dotsColl.addDot(clickDot.aX,clickDot.aY,clickDot.aR)}" />
+                </h:form>
+                <h:form id="Fieldsf" >
+                    <h:inputHidden id="fX" value="#{formDot.kx}"/>
+                    <h:inputHidden id="fY" value="#{formDot.ky}"/>
+                    <h:inputHidden id="fR" value="#{formDot.rad}"/>
+                    <h:commandButton id="fSub" styleClass="fBut" action ="#{dotsColl.addDot(formDot.kx,formDot.ky,formDot.rad)}" />
+                </h:form>
+                <h:form id="resizeForm">
+                    <h:inputHidden id="newR" value="#{resizeDot.newR}"/>
+                    <h:inputHidden id="oldR" value="#{resizeDot.oldR}"/>
+                    <h:commandButton id="areaResize" styleClass="resBut" action="#{dotsColl.reSizeDots(resizeDot.newR,resizeDot.oldR)}" />
+                </h:form>
             </h:panelGroup>
             <h:panelGroup styleClass="MainPanels" id="CheckTable" layout="block">
                 <center> Таблица проверок</center>
@@ -65,24 +85,25 @@
                 <h:form id="fieldsForm">
                     <br/> Введите R:
                     <h:panelGroup styleClass="tooltip" layout="block">
-                        <h:inputText value="#{dotMake.rad}" maxlength="30" onchange="resizeArea()" styleClass="enter" id ="rad" style="width:170px;"> </h:inputText>
+                        <h:inputText value="0.2"  maxlength="30" onchange="resizeArea()" styleClass="enter" id ="rad" style="width:170px;"> </h:inputText>
                         <span class="tooltiptext">Введите число от 1 до 4</span>
                     </h:panelGroup>
                     <br/>
                     <br/>
                     Введите Y:
                     <h:panelGroup styleClass="tooltip" layout="block">
-                        <h:inputText value="#{dotMake.ky}" maxlength="30" styleClass="enter" style="width:170px;"> </h:inputText>
+                        <h:inputText id="ky" maxlength="30" styleClass="enter" style="width:170px;"> </h:inputText>
                         <span class="tooltiptext">Введите число от -3 до 3</span>
                     </h:panelGroup>
                     <br/>
                     <br/> Выберите X:
-                    <p:spinner id="kx" value="#{dotMake.kx}" stepFactor="0.5" min="-4" max="4" size="12"/>
+                    <p:spinner id="kx"  stepFactor="0.5" min="-4" max="4" size="12"/>
                     <br/> <br/>
                     <h:commandButton
                             style="background: silver; font-size: 14pt; width:50%; height:90%; margin-left: 2.5%;"
-                            action="#{dotsColl.addDot( dotMake.kx, dotMake.ky, dotMake.rad)}"
-                            value="Проверить">
+                            value="Проверить"
+                            onclick="makeNewDotForm()"
+                    >
                     </h:commandButton>
                     <br/> <br/>
                     <h:outputLabel id="errors" styleClass="hidden" style="width:90%;"/>
@@ -93,13 +114,13 @@
                     <h:form>
                         <h:commandButton
                                 style="background: silver; font-size: 18pt; width:80%; height:90%; margin-left: 2.5%; margin-top:5.25%;"
+                                action="#{dotsColl.clearDots}"
                                 value="Убрать текущие точки"/>
                     </h:form>
                 </center>
             </h:panelGroup>
         </h:panelGroup>
-        <script type="text/javascript" src="MainPageScripts.js">
-        </script>
+        <script type="text/javascript" src="MainPageScripts.js"/>
     </h:body>
 </f:view>
 </html>

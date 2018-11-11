@@ -5,11 +5,13 @@ import java.io.Serializable;
 public class DotMaker implements Serializable {
     private double kx;
     private double ky;
+   // private double ax;
+ //   private double ay;
     private double rad;
     private String color;
-    private boolean res;
+    private String res;
 
-    public DotMaker(double kx, double ky, double rad, String color, boolean res) {
+    public DotMaker(double kx, double ky, double rad, String color, String res) {
         this.kx = kx;
         this.ky = ky;
         this.rad = rad;
@@ -53,32 +55,37 @@ public class DotMaker implements Serializable {
         this.rad = rad;
     }
 
-    public boolean isRes() {
+    public String getRes() {
         return res;
     }
 
-    public void setRes(boolean res) {
+    public void setRes(String res) {
         this.res = res;
     }
 
-    public void areaCheck() {
-        updateRes();
+    public boolean areaCheck() {
 
-        updateColor();
+        return (this.kx <= 0 && this.ky <= 0 && -this.kx <= this.rad / 2 && -this.ky <= this.rad) ||
+                (this.kx <= 0 && this.ky >= 0 && (this.kx * this.kx + this.ky * this.ky) <= (this.rad * this.rad) / 4) ||
+                (this.kx >= 0 && this.ky <= 0 && this.ky >= (-this.kx - this.rad)); // FIX IT!!!
     }
 
-    private void updateColor() {
-        if (res) {
-            color = "green";
+    public void calcColor() {
+        if (areaCheck()) {
+            this.color = "green";
         } else {
-            color = "red";
+            this.color="red";
         }
     }
 
-    private void updateRes() {
-        res = (this.kx <= 0 && this.ky <= 0 && Math.abs(this.kx) <= this.rad / 2 && Math.abs(this.ky) <= this.rad) ||
-                (this.kx <= 0 && this.ky >= 0 && (this.kx * this.kx + this.ky * this.ky) <= (this.rad * this.rad)) ||
-                (this.kx >= 0 && this.ky <= 0 && this.ky >= (2 * this.kx - this.rad / 2));
+    public void calcRes() {
+        if (areaCheck()) {
+            this.color = "Попадает";
+        } else {
+            this.color="Не попадает";
+        }
     }
 
-}
+    }
+
+

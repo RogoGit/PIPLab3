@@ -10,15 +10,33 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean eager="true">
+    <managed-bean eager="false">
         <managed-bean-name>dotsColl</managed-bean-name>
         <managed-bean-class>com.DotsCollectionBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean eager="true">
+    <managed-bean eager="false">
         <managed-bean-name>dotMake</managed-bean-name>
         <managed-bean-class>com.DotMaker</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean eager="false">
+        <managed-bean-name>resizeDot</managed-bean-name>
+        <managed-bean-class>com.ResizeBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean eager="false">
+        <managed-bean-name>clickDot</managed-bean-name>
+        <managed-bean-class>com.AreaClickedDots</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean eager="false">
+        <managed-bean-name>formDot</managed-bean-name>
+        <managed-bean-class>com.FormClickedDots</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
