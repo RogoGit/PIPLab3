@@ -51,6 +51,8 @@ public class DotMakerTest {
 
         //test point on center coordinate
         testPoint((rad) -> (0.), (rad) -> (0.), true);
+
+        //todo
     }
 
     private void testPoint(Function<Double, Double> calcX, Function<Double, Double> calcY, boolean isResult) {
