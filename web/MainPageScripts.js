@@ -24,16 +24,6 @@ function makeNewDotClicked() {
     }*/
 }
 
-function makeNewDotForm() {
-    var fX = document.getElementById("Fieldsf:fX");
-    var fY = document.getElementById("Fieldsf:fY");
-    var fR = document.getElementById("Fieldsf:fR");
-    fX.value = document.getElementById("fieldsForm:kx").value;
-    fY.value = document.getElementById("fieldsForm:kx").value;
-    fR.value =  document.getElementById("fieldsForm:rad").value;
-    //$('#fSub').click();
-    document.querySelector('.fBut').click();
-}
 
 function resizeArea() {
     var newRad =  document.getElementById("fieldsForm:rad").value;
