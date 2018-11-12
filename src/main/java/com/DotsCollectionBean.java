@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class DotsCollectionBean implements Serializable {
 
     private ArrayList<DotMaker> areaDots;
+    private boolean changeR = false;
 
     public DotsCollectionBean(ArrayList<DotMaker> areaDots) {
         this.areaDots = areaDots;
@@ -15,7 +16,21 @@ public class DotsCollectionBean implements Serializable {
 
     }
 
+    public boolean getChangeR() {
+        return changeR;
+    }
+
+    public void setChangeR(boolean changeR) {
+        this.changeR = changeR;
+    }
+
     public void addDot(String kx, String ky, String rad) {
+        if (this.changeR) {
+            this.changeR = false;
+            reSizeDots(Double.parseDouble(rad));
+            return;
+        }
+
         if (this.areaDots==null) {this.areaDots=new ArrayList<>();}
         DotMaker newDot = new DotMaker();
         newDot.setKx(Double.parseDouble(kx));
@@ -36,11 +51,11 @@ public class DotsCollectionBean implements Serializable {
         this.areaDots = new ArrayList<>();
     }
 
-    public void reSizeDots(double newR, double oldR) {
+    public void reSizeDots(double newR) {
 if (this.areaDots != null) {
     for (DotMaker dot : this.areaDots) {
-        dot.setAx(((dot.getKx() - 190) * (oldR/newR) / dot.getRad() + 190)*0.01);
-        dot.setAy(((dot.getKy() - 210) * (oldR/newR) / dot.getRad() + 210)*0.01);
+        dot.setAx(((dot.getKx() - 190) * (newR) / dot.getRad() + 190)*0.01);
+        dot.setAy(((dot.getKy() - 210) * (newR) / dot.getRad() + 210)*0.01);
         dot.setColor(dot.calcColor());
     }
 }

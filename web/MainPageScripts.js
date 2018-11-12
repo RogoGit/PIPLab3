@@ -3,38 +3,25 @@ var oldRad = 1;
 
 function getMousePos() {
     return {
-        x: (event.clientX - 390) / 180,
-        y: -(event.clientY - 340) / 180
+        x: (event.clientX - 190) / 180,
+        y: -(event.clientY - 210) / 180
     };
 }
 
 function makeNewDotClicked() {
-    var aX = document.getElementById("AreaForm:AreaX");
-    var aY = document.getElementById("AreaForm:AreaY");
-    var aR = document.getElementById("AreaForm:AreaR");
-    aX.value = getMousePos().x;
-    aY.value = getMousePos().y;
+    var aX = document.getElementById("fieldsForm:kx_input");
+    var aY = document.getElementById("fieldsForm:ky");
+    var aR = document.getElementById("fieldsForm:rad");
+    aX.value = getMousePos().x.toFixed(3);
+    aY.value = getMousePos().y.toFixed(3);
     aR.value =  document.getElementById("fieldsForm:rad").value;
-    //$('#areaSub').click();
-    document.querySelector('.sbBut').click();
-   /* return {
-        x: aX.value,
-        y: aY.value,
-        r:  document.getElementById("fieldsForm:rad").value
-    }*/
+    document.querySelector('.checkdot').click();
 }
 
 
 function resizeArea() {
-    var newRad =  document.getElementById("fieldsForm:rad").value;
-    var old = oldRad;
-        oldRad = newRad;
-document.getElementById("resizeForm:newR").value = newRad;
-document.getElementById("resizeForm:oldR").value = old;
-    document.querySelector('.resBut').click();
-        return {
-        n: newRad,
-            o: old
-    }
+    document.getElementById('fieldsForm:changer').value = 'true';
+    document.querySelector('.checkdot').click();
+    return true;
 }
 
