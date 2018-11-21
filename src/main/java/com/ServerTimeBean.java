@@ -8,7 +8,7 @@ public class ServerTimeBean implements Serializable{
     private String time;
     
     public String getTime() {
-        return time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-uuuu hh:mm:ss a"));
+        return time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm:ss "));
     }
 
     public void setTime(String time) {

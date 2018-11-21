@@ -52,6 +52,7 @@ body {
     height: 85%;
     margin: 2.5%;
     font-size: 20pt;
+    overflow:auto;
 }
 
 #Fields {
