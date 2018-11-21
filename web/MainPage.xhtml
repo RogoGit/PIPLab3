@@ -35,7 +35,7 @@
                 <line x1="190" x2="190" y1="0" y2="420" stroke="black" stroke-width="3"/>
                 <line x1="0" x2="380" y1="210" y2="210" stroke="black" stroke-width="3"/>
                     <ui:repeat value="#{dotsColl.areaDots}" var="dot">
-                    <circle r="3" cx="#{(190 + dot.ax)*180*dot.rad}" cy="#{(210 + dot.ay)*(-180)*dot.rad}" fill="#{dot.color}" />
+                    <circle r="3" cx="#{dot.ax*dot.rad}" cy="#{dot.ay*dot.rad}" fill="#{dot.color}" />
                     </ui:repeat>
                 </svg>
                 </center>
@@ -76,25 +76,27 @@
             <h:panelGroup styleClass="MainPanels" id="Fields" layout="block">
                 <h:form id="fieldsForm">
                     <h:inputHidden id="changer" value="#{dotsColl.changeR}" />
-                    <br/> Введите R:
-                    <h:panelGroup styleClass="tooltip" layout="block">
-                        <h:inputText  maxlength="30" value="#{dotMake.rad}" required="true" requiredMessage="Введите радиус" onchange="return resizeArea()" styleClass="enter" id ="rad" style="width:170px;">
-                            <f:validator validatorId="RValidator" />
-                        </h:inputText>
-                        <span class="tooltiptext">Введите число от 1 до 4</span>
-                    </h:panelGroup>
+                    <br/>
+                    Выберите X:
+                    <p:spinner id="kx"  value="#{dotMake.kx}" stepFactor="0.5" min="-4" max="4" size="12"/>
                     <br/>
                     <br/>
                     Введите Y:
                     <h:panelGroup styleClass="tooltip" layout="block">
-                        <h:inputText id="ky"   value="#{dotMake.ky}" required="true" requiredMessage="Введите Y" maxlength="30" styleClass="enter" style="width:170px;">
+                        <h:inputText id="ky"   value="#{dotMake.ky}" required="true" converterMessage="Y должен быть числом!" requiredMessage="Введите Y" maxlength="30" styleClass="enter" style="width:170px;">
                             <f:validator validatorId="YValidator" />
                         </h:inputText>
                         <span class="tooltiptext">Введите число от -3 до 3</span>
                     </h:panelGroup>
                     <br/>
-                    <br/> Выберите X:
-                    <p:spinner id="kx"  value="#{dotMake.kx}" stepFactor="0.5" min="-4" max="4" size="12"/>
+                    <br/>
+                    Введите R:
+                    <h:panelGroup styleClass="tooltip" layout="block">
+                        <h:inputText  maxlength="30" value="#{dotMake.rad}" required="true" converterMessage="Радиус должен быть числом!" requiredMessage="Введите радиус" onchange="return resizeArea()" styleClass="enter" id ="rad" style="width:170px;">
+                            <f:validator validatorId="RValidator" />
+                        </h:inputText>
+                        <span class="tooltiptext">Введите число от 1 до 4</span>
+                    </h:panelGroup>
                     <br/> <br/>
                     <h:commandButton
                             class="checkdot"

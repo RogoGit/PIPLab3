@@ -105,7 +105,7 @@ body {
 
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    top: 125%;
     left: 50%;
     margin-left: -60px;
 
@@ -117,7 +117,7 @@ body {
 .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
