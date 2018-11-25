@@ -35,7 +35,7 @@
                 <line x1="190" x2="190" y1="0" y2="420" stroke="black" stroke-width="3"/>
                 <line x1="0" x2="380" y1="210" y2="210" stroke="black" stroke-width="3"/>
                     <ui:repeat value="#{dotsColl.areaDots}" var="dot">
-                    <circle r="3" cx="#{dot.ax*dot.rad}" cy="#{dot.ay*dot.rad}" fill="#{dot.color}" />
+                    <circle r="3" cx="#{190+180/dotMake.rad*dot.kx}" cy="#{210-(180/dotMake.rad*dot.ky)}" fill="#{dot.color}" />
                     </ui:repeat>
                 </svg>
                 </center>

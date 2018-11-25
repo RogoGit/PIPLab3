@@ -19,4 +19,8 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/navigation-faces-config.xml</param-value>
     </context-param>
+    <error-page>
+        <exception-type>java.net.ConnectException</exception-type>
+        <location>/Error.xhtml</location>
+    </error-page>
 </web-app>
